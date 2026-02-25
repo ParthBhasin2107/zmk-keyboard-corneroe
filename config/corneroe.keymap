@@ -11,6 +11,15 @@
 #include <dt-bindings/zmk/pointing.h>
 
 / {
+    behaviors {
+        scrolling: scrolling {
+            compatible = "zmk,behavior-sensor-rotate";
+            label = "SCROLLING";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 

@@ -51,7 +51,7 @@
 
         raise_layer {
             bindings = <
-&kp TAB  &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT  &kp CARET  &kp AMPS  &kp ASTRK  &kp LPAR  &kp RPAR  &kp BSPC  &kp LCTRL  &kp MINUS  &kp EQUAL  &kp LBKT  &kp RBKT  &kp BSLH  &kp F1  &mmv MOVE_LEFT  &mmv MOVE_UP  &mmv MOVE_RIGHT  &mkp MB5  &msc MOVE_Y(10)  &kp C_AL_LOCK  &kp GRAVE  &kp PLUS  &kp F1  &kp F2  &kp F3  &kp F2  &mkp LCLK  &mmv MOVE_DOWN  &mkp RCLK  &mkp MB4  &kp TILDE  &kp LGUI  &trans  &kp LEFT_SHIFT  &kp LEFT_CONTROL  &trans  &kp RALT  &trans  &trans
+&kp TAB  &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT  &kp CARET  &kp AMPS  &kp ASTRK  &kp LPAR  &kp RPAR  &kp BSPC  &kp LCTRL  &kp MINUS  &kp EQUAL  &kp LBKT  &kp RBKT  &kp BSLH  &kp F1  &mmv MOVE_LEFT  &mmv MOVE_UP  &mmv MOVE_RIGHT  &mkp MB5  &msc SCRL_UP  &kp C_AL_LOCK  &kp GRAVE  &kp PLUS  &kp F1  &kp F2  &kp F3  &kp F2  &mkp LCLK  &mmv MOVE_DOWN  &mkp RCLK  &mkp MB4  &msc SCRL_DOWN  &kp LGUI  &trans  &kp LEFT_SHIFT  &kp LEFT_CONTROL  &trans  &kp RALT  &trans  &trans
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &precise_scroll>;

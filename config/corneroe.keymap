@@ -9,12 +9,38 @@
 
 / {
     behaviors {
-        // We use the exact behavior from the code you found that works
+
+        /* Micro-step scroll macros
+         * Each encoder tick sends multiple smaller scroll events
+         * This makes scrolling feel smoother like a touchpad
+         */
+
+        micro_scroll_up: micro_scroll_up {
+            compatible = "zmk,behavior-macro";
+            label = "MICRO_SCROLL_UP";
+            #binding-cells = <0>;
+            bindings = <
+                &msc SCRL_UP
+                &msc SCRL_UP
+            >;
+        };
+
+        micro_scroll_down: micro_scroll_down {
+            compatible = "zmk,behavior-macro";
+            label = "MICRO_SCROLL_DOWN";
+            #binding-cells = <0>;
+            bindings = <
+                &msc SCRL_DOWN
+                &msc SCRL_DOWN
+            >;
+        };
+
+        // Encoder rotate behavior (unchanged except using micro scroll)
         scroll_up_down: behavior_sensor_rotate_mouse_wheel_up_down {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
-            bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
-            tap-ms = <20>; 
+            bindings = <&micro_scroll_up>, <&micro_scroll_down>;
+            tap-ms = <20>;
         };
     };
 
@@ -22,7 +48,7 @@
         compatible = "zmk,keymap";
 
         default_layer {
-            // Left: Volume | Right: Precise Scroll
+            // Left: Volume | Right: Smooth Micro Scroll
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &scroll_up_down>;
             
             bindings = <

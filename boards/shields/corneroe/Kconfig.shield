@@ -1,8 +1,7 @@
-# Copyright (c) 2020 Pete Johanson
-# SPDX-License-Identifier: MIT
-
 config SHIELD_CORNEROE_LEFT
     def_bool $(shields_list_contains,corneroe_left)
 
 config SHIELD_CORNEROE_RIGHT
     def_bool $(shields_list_contains,corneroe_right)
+
+rsource "drivers/input/Kconfig"

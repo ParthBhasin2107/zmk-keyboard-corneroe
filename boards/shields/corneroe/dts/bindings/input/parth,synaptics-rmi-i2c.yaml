@@ -1,0 +1,12 @@
+description: Synaptics RMI4 touchpad over I2C (relative mouse polling)
+
+compatible: "parth,synaptics-rmi-i2c"
+
+include:
+  - name: i2c-device.yaml
+
+properties:
+  poll-interval-ms:
+    type: int
+    default: 10
+    description: Polling interval in milliseconds

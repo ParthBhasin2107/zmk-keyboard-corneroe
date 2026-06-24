@@ -41,7 +41,3 @@ endchoice
 endif # LVGL
 
 endif
-
-if SHIELD_CORNEROE_RIGHT
-rsource "drivers/input/Kconfig"
-endif

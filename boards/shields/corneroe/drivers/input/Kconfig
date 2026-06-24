@@ -1,0 +1,9 @@
+config INPUT_SYNAPTICS_RMI_I2C
+    bool "Synaptics RMI4 I2C touchpad driver"
+    default y
+    depends on DT_HAS_PARTH_SYNAPTICS_RMI_I2C_ENABLED
+    depends on I2C
+    select INPUT
+    help
+      Driver for Synaptics RMI4 touchpad over I2C,
+      polling register 0 for relative motion reports.

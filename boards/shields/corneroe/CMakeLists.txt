@@ -1,0 +1,1 @@
+add_subdirectory_ifdef(CONFIG_INPUT_SYNAPTICS_RMI_I2C drivers/input)

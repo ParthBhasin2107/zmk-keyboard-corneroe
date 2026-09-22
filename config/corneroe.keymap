@@ -1,20 +1,24 @@
+// Must be defined before pointing.h is included, or the header's default (10) wins.
+// &msc scrolls at this many units/sec while held. With smooth scrolling on,
+// the host divides by 16, so 16 units = 1 wheel notch.
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 400
+
 #include <dt-bindings/zmk/mouse.h>
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 
-// This matches the working code's sensitivity and makes the scroll "accurate"
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 100
-
 / {
     behaviors {
-        // We use the exact behavior from the code you found that works
+        // Each encoder detent holds &msc for tap-ms: 400 units/s * 40ms ~= 16 units ~= 1 notch,
+        // spread over a few 16ms reports so it glides instead of jumping.
+        // Tune: raise SCRL_VAL for more distance per detent, raise tap-ms for a longer glide.
         scroll_up_down: behavior_sensor_rotate_mouse_wheel_up_down {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
-            tap-ms = <20>; 
+            tap-ms = <40>;
         };
     };
 

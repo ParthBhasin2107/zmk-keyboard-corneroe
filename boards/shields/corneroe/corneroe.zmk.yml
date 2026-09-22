@@ -7,7 +7,6 @@ exposes: [i2c_oled]
 features:
   - keys
   - display
-  - underglow
   - studio
 siblings:
   - corneroe_left

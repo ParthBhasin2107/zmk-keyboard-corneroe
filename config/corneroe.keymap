@@ -9,6 +9,12 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 
+#define BASE 0
+#define LOWER 1
+#define RAISE 2
+#define GAME 3
+#define GAME_FN 4
+
 / {
     behaviors {
         // Each encoder detent holds &msc for tap-ms: 400 units/s * 40ms ~= 16 units ~= 1 notch,
@@ -38,7 +44,7 @@
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &scroll_up_down>;
             
             bindings = <
-&kp ESC  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &kp BSPC  &kp TAB  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &kp HOME  &kp LEFT  &kp UP  &kp RIGHT  &kp END  &kp RET  &kp LEFT_ALT  &bt BT_CLR  &kp C_PREV  &kp C_PLAY_PAUSE  &kp C_NEXT  &kp GLOBE  &kp C_VOL_DN  &kp C_VOL_UP  &kp DOWN  &trans  &trans  &trans  &kp LGUI  &trans  &kp LEFT_SHIFT  &kp SPACE  &trans  &kp LEFT_CONTROL  &trans  &trans
+&kp ESC  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &kp BSPC  &kp TAB  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &kp HOME  &kp LEFT  &kp UP  &kp RIGHT  &kp END  &kp RET  &kp LEFT_ALT  &bt BT_CLR  &kp C_PREV  &kp C_PLAY_PAUSE  &kp C_NEXT  &kp GLOBE  &kp C_VOL_DN  &kp C_VOL_UP  &kp DOWN  &trans  &trans  &tog GAME  &kp LGUI  &trans  &kp LEFT_SHIFT  &kp SPACE  &trans  &kp LEFT_CONTROL  &trans  &trans
             >;
         };
 
@@ -47,6 +53,35 @@
             
             bindings = <
 &kp TAB  &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT  &kp CARET  &kp AMPS  &kp ASTRK  &kp LPAR  &kp RPAR  &kp BSPC  &kp LCTRL  &kp MINUS  &kp EQUAL  &kp LBKT  &kp RBKT  &kp BSLH  &kp F1  &mmv MOVE_LEFT  &mmv MOVE_UP  &mmv MOVE_RIGHT  &mkp MB5  &msc SCRL_UP  &kp C_AL_LOCK  &kp GRAVE  &kp PLUS  &kp F1  &kp F2  &kp F3  &kp F2  &mkp LCLK  &mmv MOVE_DOWN  &mkp RCLK  &mkp MB4  &msc SCRL_DOWN  &kp LGUI  &trans  &kp LEFT_SHIFT  &kp LEFT_CONTROL  &trans  &kp RALT  &trans  &trans
+            >;
+        };
+
+        // Gaming mode: toggle with Lower + bottom-right key. Only the left half changes;
+        // the right half falls through to the base layer so chat still works.
+        game_layer {
+            display-name = "Game";
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &scroll_up_down>;
+
+            bindings = <
+&kp TAB     &kp Q  &kp W  &kp E  &kp R  &kp T     &trans  &trans  &trans  &trans  &trans  &trans
+&kp LSHIFT  &kp A  &kp S  &kp D  &kp F  &kp G     &trans  &trans  &trans  &trans  &trans  &trans
+&kp LCTRL   &kp Z  &kp X  &kp C  &kp V  &kp B     &trans  &trans  &trans  &trans  &trans  &trans
+               &kp ESC  &mo GAME_FN  &kp SPACE    &trans  &trans  &trans
+                                        &trans    &trans
+            >;
+        };
+
+        // Held with the middle left thumb while in gaming mode.
+        game_fn_layer {
+            display-name = "Game Fn";
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &scroll_up_down>;
+
+            bindings = <
+&kp GRAVE   &kp N1  &kp N2  &kp N3  &kp N4  &kp N5    &trans  &trans  &trans  &trans  &trans  &tog GAME
+&kp LALT    &kp N6  &kp N7  &kp N8  &kp N9  &kp N0    &trans  &trans  &trans  &trans  &trans  &trans
+&trans      &kp F1  &kp F2  &kp F3  &kp F4  &kp F5    &trans  &trans  &trans  &trans  &trans  &tog GAME
+                      &trans  &trans  &trans          &trans  &trans  &trans
+                                        &trans    &trans
             >;
         };
     };

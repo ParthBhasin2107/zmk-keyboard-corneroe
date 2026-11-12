@@ -6,14 +6,16 @@ manifest:
       url-base: https://github.com/zmkfirmware
     # Additional modules containing boards/shields/custom code can be listed here as well
     # See https://docs.zephyrproject.org/3.2.0/develop/west/manifest.html#projects
-    - name: mctechnology17
-      url-base: https://github.com/mctechnology17
+    # Fork of mctechnology17/zmk-nice-oled with battery-text centering added.
+    - name: parthbhasin2107
+      url-base: https://github.com/ParthBhasin2107
   projects:
     - name: zmk
       remote: zmkfirmware
       import: app/west.yml
     - name: zmk-nice-oled
-      remote: mctechnology17
-      revision: main
+      remote: parthbhasin2107
+      # Pinned so upstream changes can't silently alter the build. Bump deliberately.
+      revision: 0c1338d2e29c668f2114070d89aa3d27d67b92db
   self:
     path: config

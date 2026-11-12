@@ -85,6 +85,18 @@ To flash: press Boot on the Adjust layer (or double-tap the reset button), then 
 
 Keymap changes saved in ZMK Studio override `config/corneroe.keymap`. If an edit to the file doesn't show up after flashing, flash `settings_reset` to both halves and re-pair.
 
+## Notes
+
+### Bluetooth input lag (fixed)
+
+`nice_oled` draws the screens on a dedicated thread at priority 5, the same priority as ZMK's BLE HID and split notify threads. Equal-priority threads don't preempt each other, so every animation frame (bongo cat on the left, cat on the right) held keypresses back until it finished, causing lag on every host.
+
+`config/corneroe.conf` sets `CONFIG_ZMK_DISPLAY_DEDICATED_THREAD_PRIORITY=10` so the display only runs when input isn't waiting. Keep this if you change animations or display modules.
+
+### Mouse / Bluetooth drop-outs after `settings_reset`
+
+`settings_reset` wipes the keyboard's pairings, but the host keeps its old pairing and retries it in a loop, flooding 2.4 GHz and making other wireless devices (e.g. a 2.4 GHz mouse dongle) drop out. After flashing it, remove Corneroe from the host's Bluetooth settings and pair again.
+
 ## Files
 
 - `config/corneroe.keymap` — layers, encoders, behaviors
